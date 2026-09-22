@@ -1,0 +1,17 @@
+{
+  "account": "学号",
+  "password": "教务/统一认证密码",
+
+  "lng": 119.204375,
+  "lat": 26.065632,
+  "coordinateWGS84": false,
+
+  "restKey": "",
+
+  "wait": true,
+  "jitterSeconds": 45,
+  "retry": 2,
+  "retryMinutes": 5,
+  "warnAt": "21:55",
+  "caIsNo": "0"
+}
