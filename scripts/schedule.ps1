@@ -1,4 +1,4 @@
-# 晚点名自动签到 - 轮询型定时脚本（PowerShell）
+﻿# 晚点名自动签到 - 轮询型定时脚本（PowerShell）
 # 用法: powershell -ExecutionPolicy Bypass -File scripts\schedule.ps1
 # 行为: 每天 21:25 启动等待循环，到点后调用 node index.js；当日完成过则不再重复。
 'use strict';
@@ -23,7 +23,12 @@ while ($true) {
         continue
     }
 
-    if ((Get-Date).Hour -ge 21 -and (Get-Date).Minute -ge 25 -or (Get-Date).Hour -gt 21) {
+    # 到点判断：21:25 及以后启动。
+    # 说明：原写法 (Hour -ge 21 -and Minute -ge 25 -or Hour -gt 21) 实测与下方
+    # 显式写法完全等价（PowerShell 对同级 -and/-or 从左到右求值），并非 bug；
+    # 此处改为显式分组只是提高可读性，避免读者误以为存在优先级陷阱。
+    $now = Get-Date
+    if ($now.Hour -gt 21 -or ($now.Hour -eq 21 -and $now.Minute -ge 25)) {
         Log "到达执行时间，启动签到..."
         Push-Location $Root
         $out = & node index.js 2>&1 | Out-String
