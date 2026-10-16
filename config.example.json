@@ -13,5 +13,6 @@
   "retry": 2,
   "retryMinutes": 5,
   "warnAt": "21:55",
+  "wakeAt": "20:30",
   "caIsNo": "0"
 }
