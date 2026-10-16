@@ -1,6 +1,7 @@
 config.json
 .credential.json
 .last-success
+.watch.lock
 .run.log
 run.log
 logs/
